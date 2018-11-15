@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model {
 
-	$table = 'reports';
 	protected $fillable = [
 		'url','status','datetime','time'
 	];
