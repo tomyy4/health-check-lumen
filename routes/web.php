@@ -10,7 +10,6 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-
 use Illuminate\Http\Response;
 
 
@@ -19,7 +18,11 @@ $router->get('/', function () use ($router) {
 });
 
 
-$router->get('home', function () {
-    return response()->json(http_response_code(200));
-});
 
+//List all reports
+$router->get('logs/index','LogController@index');
+//Creates new report
+$router->post('logs/add','LogController@store');
+//Shows report filtered by id
+$router->get('logs/show/{id}','LogController@show');
+	
