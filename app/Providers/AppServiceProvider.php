@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
          $this->app->bind(
-            'App\Repositories\LogRepositoryInterface',
+            'App\Repositories\LogRepositoryInterface\DbLogRepository',
             'App\Repositories\DbLogRepository'
         );
     }

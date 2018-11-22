@@ -3,46 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\LogService;
 use Laravel\Lumen\Routing\Controller as BaseController;
-use App\Repositories\LogRepositoryInterface;
 use App\Log;
 
 
 class LogController extends BaseController
 {
-    protected $log;
+    //protected $log;
 
-    public function __construct(LogRepositoryInterface $log) {
-        $this->log = $log;
+    public function __construct(LogService $logService) {
+        $this->logService = $logService;
     }
 
 	public function index() {
-        $logs = $this->log->getAll();
-        return $logs;
+        return $this->logService->allLogs();
     }
 
     public function store(Request $request) {
-
-        $this->validate($request, [
-            'website' => 'required|url',
-            'status' => 'required|integer',
-            'datetime' => 'required|date',
-            'time' => 'required|integer'
-        ]);
-
-        $log = new Log();
-        $log->website = $request->website;
-        $log->status = $request->status;
-        $log->datetime = $request->datetime;
-        $log->time = $request->time;
         //store the log
-        $log->save();
-        return response()->json('yeeey');
+        //dd($this->validate());
+        return $this->logService->store($request);
     }
 
     public function show($id) {
-        $log = $this->log->getById($id);
-        return $log;
+        return $this->logService->findLogById($id);
     }
+
+   
 	
 }

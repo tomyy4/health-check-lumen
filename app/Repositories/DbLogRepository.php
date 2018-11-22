@@ -13,8 +13,7 @@ class DbLogRepository implements LogRepositoryInterface {
 	}
 
 	public function storeLog(array $data) {
-		$log = Log::create($data->all());
-		return $log;
+		$log = Log::create($data);
 	}
 
 	public function getById($id) {
